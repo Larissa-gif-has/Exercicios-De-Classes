@@ -1,0 +1,48 @@
+class ControleEstoque:
+    def __init__(self):
+        self.estoque = {}
+
+    def adicionar_produto(self, nome_produto, preco, quantidade):
+        if nome_produto in self.estoque:
+            print(f'O produto \033[0;31m{nome_produto}\033[m já existe. Atualizando quantidade...')
+            self.estoque[nome_produto]['quantidade'] += quantidade
+        else:
+            self.estoque[nome_produto] = {'preço': preco,
+                                          'quantidade': quantidade}
+            print(f'Adicionando o produto \033[0;34m{nome_produto}\033[m...')
+
+    def remover_produto(self, nome_produto, quantidade_remover):
+        if nome_produto in self.estoque:
+            produto = self.estoque[nome_produto]
+            produto['quantidade'] -= quantidade_remover
+            print(f'Produto atualizado. Quantidade restante de {nome_produto}: {produto['quantidade']}')
+            if produto['quantidade'] == 0:
+                del self.estoque[nome_produto]
+
+    def calcular_valor_total(self):
+        total = 0
+        for nome_produto, dados in self.estoque.items():
+            total += dados['quantidade']*dados['preço']
+        print(f'O valor total do estoque é: \033[0;34m{total:.2f}\033[m')
+
+
+
+controle = ControleEstoque()
+while True:
+    escolha = input('Escolha uma operação (adicionar/remover/total):')
+    if escolha == 'sair':
+        break
+    else:
+       if escolha == 'adicionar':
+          nome_produto = input('Informe o nome do produto:')
+          preco = float(input('Informe o preço:'))
+          quantidade = int(input('Informe a quantidade:'))
+          controle.adicionar_produto(nome_produto, preco, quantidade)
+       elif escolha == 'remover':
+           nome_produto = input('Informe o nome do produto:')
+           quantidade_remover = int(input('Informe a quantidade a ser removida:'))
+           controle.remover_produto(nome_produto, quantidade_remover)
+       elif escolha == 'total':
+           controle.calcular_valor_total()
+
+

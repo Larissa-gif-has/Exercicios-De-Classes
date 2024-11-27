@@ -1,0 +1,95 @@
+class Estudante:
+    def __init__(self, nome, idade, curso):
+        self.nome = nome
+        self.idade = idade
+        self.curso = curso
+
+    def detalhe_estudante(self):
+        print(f'Nome: \033[0;34m{self.nome:<10}\033[m  Idade: \033[0;34m{self.idade:<3}\033[m'
+              f'  Curso:  \033[0;34m{self.curso:<8}\033[m')
+
+    def atualizar_curso(self, novo_curso):
+         self.curso = novo_curso
+
+
+class Curso:
+    def __init__(self, nome_curso, duracao):
+        self.nome_curso = nome_curso
+        self.duracao = duracao
+
+    def detalhe_curso(self):
+        print(f'Nome do curso: \033[0;34m{self.nome_curso:<20}\033[m Duração: '
+              f'\033[0;34m{self.duracao}\033[m meses')
+
+
+    def listar_estudantes(self, estudantes):
+        self.curso = curso
+        self.duracao = duracao
+        print(f'Estudantes matriculados no curso \033[0;34m{self.curso}\033[m')
+        for estudante in estudantes:
+            if estudante.curso == curso:
+                print(f'Nome: \033[0;34m{estudante.nome:<10}\033[m'
+                      f' Idade: \033[0;34m{estudante.idade:<3}\033[m '
+                      f' Duração: \033[0;34m{self.duracao}\033[m'
+                      f' meses')
+
+estudantes = []
+cursos = []
+while True:
+    print("""1. Cadastrar Estudante
+2. Cadastrar cursos
+3. Listar Estudantes por Curso
+4. Atualizar curso do estudante
+5. Estudantes cadastrados
+6. Cursos cadastrados
+7. Sair
+""")
+    opcao = int(input('Digite a opção desejada:'))
+
+    if opcao == 1:
+        nome = input('Digite o nome do estudante:')
+        idade = input('Digite a idade do estudante:')
+        curso = input('Digite o curso:').upper()
+        duracao = input('Duração do curso (em meses):')
+        estudante = Estudante(nome, idade, curso)
+        estudantes.append(estudante)
+        print('\033[0;35mEstudante cadastrado com sucesso!\033[m')
+
+    elif opcao == 2:
+        cadastro_curso = input('Nome do curso para cadastro:')
+        duracao_curso = input('Duração do curso:')
+        curso1 = Curso(cadastro_curso, duracao_curso)
+        cursos.append(curso1)
+        print('\033[0;35mCurso cadastrado com sucesso!\033[m')
+    elif opcao == 3:
+        curso = input('Nome do curso para listar estudantes:').upper()
+        listar = Curso(curso, duracao=0)
+        listar.listar_estudantes(estudantes)
+
+    elif opcao == 4:
+        nome = input('Nome do estudante para atualizar o curso:')
+        encontrado = 0
+        for estudante in estudantes:
+            if estudante.nome == nome:
+                novo_curso = input('Novo curso:').upper()
+                duracao = input('Duração do novo curso (em meses):')
+                estudante.atualizar_curso(novo_curso)
+                print('\033[0;35mCurso atualizado com sucesso!\033[m')
+                encontrado = True
+                break
+        if not encontrado:
+            print(f'Estudante \033[0;31m{nome}\033[m não encontrado.')
+
+    elif opcao == 5:
+        print('Estudantes cadastrados:')
+        for estudante in estudantes:
+            estudante.detalhe_estudante()
+
+    elif opcao == 6:
+        print('Cursos disponíveis:')
+        for curso1 in cursos:
+            curso1.detalhe_curso()
+
+    elif opcao == 7:
+        print('Saindo...')
+        break
