@@ -1,1 +1,1 @@
-#Exercícios de classes
+#Exercícios de Python 
