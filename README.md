@@ -1,1 +1,1 @@
-#Exercícios Com Funções
+#Exercícios básicos em python, utilizando funções
